@@ -1,0 +1,18 @@
+[package]
+name = "sapphire-tally-core"
+edition.workspace = true
+version = "0.1.0"
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+chrono.workspace = true
+grain-id = { workspace = true, features = ["schemars"] }
+serde.workspace = true
+thiserror.workspace = true
+toml.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
