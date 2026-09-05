@@ -221,20 +221,20 @@ impl Default for Unit {
     }
 }
 
-/// 活動（種目）。ファイル名が id（`<id>.toml`）なので id フィールドは TOML には書かない。
+/// 活動（種目）。id はファイル名と重複するが、ファイル単体を自己完結させるため書き込む。
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Activity {
-    #[serde(skip)]
+    // id: ファイル名と重複するが自己完結のため書く（ファイル名が正、不一致は警告）
     pub id: GrainId,
     pub title: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unit: Option<Unit>,
 }
 
-/// 1スタンプ = 1ファイル。ファイル名は `<activity の id とは別の grain-id>.toml`。
+/// 1スタンプ = 1ファイル。id はファイル名と重複するが、ファイル単体を自己完結させるため書き込む。読み込み時はファイル名由来のIDを正とし、不一致は警告してファイル名を正とする。
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Stamp {
-    #[serde(skip)]
+    // id: ファイル名と重複するが自己完結のため書く（ファイル名が正、不一致は警告）
     pub id: GrainId,
     pub activity: GrainId,
     pub timestamp: DateTime<FixedOffset>,
@@ -278,8 +278,11 @@ pub fn read_activity(root: &Path, id: GrainId) -> Result<Activity> {
         path: path.display().to_string(),
         message: e.to_string(),
     })?;
-    a.id = id;
-    Ok(a)
+    if a.id != id {
+        tracing::warn!(path = %path.display(), "stamp id mismatch; using filename id");
+        a.id = id;
+    }
+
 }
 
 pub fn read_stamp(root: &Path, id: GrainId) -> Result<Stamp> {
@@ -289,7 +292,10 @@ pub fn read_stamp(root: &Path, id: GrainId) -> Result<Stamp> {
         path: path.display().to_string(),
         message: e.to_string(),
     })?;
-    s.id = id;
+    if s.id != id {
+        tracing::warn!(path = %path.display(), "stamp id mismatch; using filename id");
+        s.id = id;
+    }
     Ok(s)
 }
 
