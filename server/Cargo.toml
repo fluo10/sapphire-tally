@@ -1,0 +1,35 @@
+[package]
+name = "sapphire-tally-server"
+edition.workspace = true
+version = "0.1.0"
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+categories = ["command-line-utilities", "web-programming::http-server"]
+keywords = ["mcp", "tracker", "heatmap", "server", "self-hosted"]
+publish = false
+
+[[bin]]
+name = "sapphire-tally-server"
+path = "src/main.rs"
+
+[dependencies]
+sapphire-tally-core = { path = "../crates/sapphire-tally-core", version = "0.1.0" }
+anyhow.workspace = true
+axum.workspace = true
+chrono.workspace = true
+clap.workspace = true
+grain-id.workspace = true
+rmcp.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "signal"] }
+tokio-util.workspace = true
+tracing.workspace = true
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+http-body-util = "0.1"
+tempfile.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+tower = { version = "0.5", features = ["util"] }

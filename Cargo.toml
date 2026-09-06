@@ -1,8 +1,6 @@
 [workspace]
-# `server` is added as a member in the server task; until then this is a
-# single-member workspace. See docs/superpowers/specs for the two-crate layout.
-members = ["crates/sapphire-tally-core"]
-default-members = ["crates/sapphire-tally-core"]
+members = ["server", "crates/sapphire-tally-core"]
+default-members = ["server"]
 resolver = "3"
 
 [workspace.package]
