@@ -3,9 +3,10 @@ use grain_id::GrainId;
 use serde::{Deserialize, Serialize};
 
 /// 表示粒度。活動ごとの表示設定。既定は Day。
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Unit {
+    #[default]
     Day,
     Week,
     Month,
@@ -21,12 +22,6 @@ impl Unit {
             "month" => Ok(Unit::Month),
             other => Err(format!("unit must be one of day/week/month, got `{other}`")),
         }
-    }
-}
-
-impl Default for Unit {
-    fn default() -> Self {
-        Unit::Day
     }
 }
 

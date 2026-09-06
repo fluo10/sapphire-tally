@@ -8,6 +8,8 @@
 pub mod error;
 pub mod model;
 pub mod store;
+pub mod tally;
 
 pub use error::{Error, Result};
 pub use model::{Activity, HeatmapBucket, Stamp, Unit};
+pub use tally::Tally;
