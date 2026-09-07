@@ -1,22 +1,24 @@
 # sapphire-tally
 
-スタンプ（活動＋日時＋任意の一行コメント）を記録し、日/週/月単位のGitHub草風ヒートマップで頻度を可視化する、ファイルベース（TOML・1スタンプ1ファイル）の記録ツール。
+> Language: **English** | [日本語](README.ja.md)
 
-**開発中です。** MVPはMCPサーバーのみを提供します。
+A file-based (TOML, one file per stamp) tracking tool that records stamps (an activity + timestamp + optional one-line comment) and visualizes frequency with day/week/month GitHub-style heatmaps.
 
-## 使い方（予定）
+**Under development.** The MVP ships the MCP server only.
+
+## Usage (planned)
 
 ```powershell
 sapphire-tally-server --data-dir C:\path\to\tally-data
 # -> http://127.0.0.1:3174/mcp
 ```
 
-## データ形式
+## Data format
 
-- `<data-dir>/activities/<grain-id>.toml` — 種目（title必須、unit任意: day/week/month）
-- `<data-dir>/stamps/<grain-id>.toml` — スタンプ（activity/timestamp必須、comment任意）
-- ファイル名はgrain-id（7文字BASE32）。ファイル内にもidフィールドを持つが、ファイル名が正
+- `<data-dir>/activities/<grain-id>.toml` — an activity (`title` required, `unit` optional: day/week/month)
+- `<data-dir>/stamps/<grain-id>.toml` — a stamp (`activity`/`timestamp` required, `comment` optional)
+- Filenames are grain-ids (7-char BASE32). Each file also carries an `id` field, but the filename is authoritative.
 
-## MCPツール
+## MCP tools
 
 `activity_add` / `activity_list` / `stamp_add` / `stamp_list` / `heatmap`
