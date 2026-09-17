@@ -2,7 +2,7 @@
 
 > Language: **English** | [日本語](README.ja.md)
 
-A file-based (TOML, one file per stamp) tracking tool that records stamps (an activity + timestamp + optional one-line comment) and visualizes frequency with day/week/month GitHub-style heatmaps.
+A stamp tracker with GitHub-style heatmaps built on [sapphire-framework](https://github.com/fluo10/sapphire-framework) — file-based, local-first, made for human-agent collaboration. Stamps are an activity + timestamp + optional one-line comment, each stored as one plain TOML file.
 
 **Under development.** The MVP ships the MCP server only.
 
